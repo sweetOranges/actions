@@ -1,0 +1,18 @@
+name: CI
+on:
+  schedule:
+    - cron: '0 1 * * *'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          extensions: curl, openssl 
+      - name: Run notifyer
+        env:
+          secret_key: ${{secrets.SECRET_KEY}}
+        run: php ./run.php notifyer
