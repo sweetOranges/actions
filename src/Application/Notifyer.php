@@ -7,8 +7,9 @@ class Notifyer {
 	public function run() {
 		$calender = $this->get_calender();
 		$nextTimeStamp =  strtotime('+1 day');
-		$nextDay = date('Y年m月d日', $nextTimeStamp);
+		$nextDay = date('Ymd', $nextTimeStamp);
 		if(!isset($calender[$nextDay])) {
+			\App\Helper::L("$nextDay is empty");
 			return;
 		}
 		$nl = $calender[$nextDay];
